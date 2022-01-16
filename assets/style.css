@@ -1,0 +1,20 @@
+* {
+    font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+.main {
+    margin-top: 50px;
+}
+.hide {
+    display: none;
+}
+
+.show {
+    display: block;
+}
+#start-button {
+    background: lightgreen;
+    font-family: 'Courier New', Courier, monospace;
+}
+#high-score label {
+    font-size: 30px;
+}
