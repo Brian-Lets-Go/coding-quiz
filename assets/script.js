@@ -19,7 +19,7 @@ var choicesEl = document.querySelector("#choices");
 //Questions
 var questions = [
     {
-        title: "Commonly Used data types DO NOT include:",
+        title: "Commonly Used data types do not include:",
         choices: ["stings", "booleans", "alerts", "numbers"],
         answer: "alerts"
     },
@@ -66,7 +66,7 @@ function second() {
     
     if (time <= 0) {
         
-        endQuiz();
+        finishQuiz();
     
     } else {
         
@@ -108,5 +108,44 @@ function pullQuestion() {
      });
 }
 
+//click on question answer
+//if wrong deduct time, display response and go to next question 
+function answerSelect() {
+    if (this.value !== questions[questionIndex].answer) {
+        
+        time -= 15;
+
+    if (time < 0) {
+        time = 0;
+    }
+
+    timeEl.textContext = time;
+
+    responseEl.textContent = "Last Question Incorrect";
+
+    //If correct
+    } else {
+
+    responseEl.textContent = "Last Question Correct";    
+
+    }
+
+    //display response for 3 seconds
+    responseEl.setAttribute("class", "response show");
+
+    setTimeout(function() {
+        responseEl.setAttribute("class", "response hide");
+    }, 3000);
+
+    //advance question
+    questionIndex++;
+
+    //end quiz after last question
+    if (questionIndex === questions.length) {
+        finishQuiz();
+    } else {
+        pullQuestion();
+    }
+}
 
 startBtn.onclick = quizStart;
