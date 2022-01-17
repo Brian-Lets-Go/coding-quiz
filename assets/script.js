@@ -89,32 +89,24 @@ function pullQuestion() {
     titleEl.textContent = question.title;
 
     //clear choices element
-    choicesEl.innerHTML = ""
+    choicesEl.innerHTML = "";
 
-    // //display choices
-    // question.choices.forEach(function (choice, i) {
+    //display choices
+    question.choices.forEach(function (answer, i) {
         
-//         var answerButton = document.createElement(<"button">);
+         var answerButton = document.createElement("button");
         
-//         answerButton.setAttribute("class", "answer");
+         answerButton.setAttribute("class", "choice");
         
-//         answerButton.setAttribute("value", choice);
+         answerButton.setAttribute("value", answer);
 
-//         answerButton.textContent = i + 1 + " - " + choice;
+         answerButton.textContent = i + 1 + " - " + answer;
 
-//         answerButton.onClick = answerSelect;
+         answerButton.onClick = answerSelect;
 
-//         choicesEl.appendChild(answerButton);
-//     });
-// }
-
-// //when button question gets clicked
-// //if wrong deduct time and respond incorrect
-// function answerSelect() {
-
-//     if (this.value != )
-
-// }
+         choicesEl.appendChild(answerButton);
+     });
+}
 
 
 startBtn.onclick = quizStart;
