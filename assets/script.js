@@ -48,7 +48,7 @@ var questions = [
 //function to begin quiz
 //start timer, switch screens, call pullQuestion()
 function quizStart() {
-    
+
     startSection.setAttribute("class", "hide");
 
     quizSection.setAttribute("class", "show");
@@ -63,13 +63,13 @@ function quizStart() {
 
 //set function for setInterval
 function second() {
-    
+
     if (time <= 0) {
-        
+
         finishQuiz();
-    
+
     } else {
-        
+
         time--;
         timeEl.textContent = time;
 
@@ -78,7 +78,7 @@ function second() {
 
 //pull question from array and display in questionEl
 function pullQuestion() {
-    
+
     //find corresponding question in array
     var question = questions[questionIndex];
 
@@ -93,47 +93,48 @@ function pullQuestion() {
 
     //display choices
     question.choices.forEach(function (answer, i) {
-        
-         var answerButton = document.createElement("button");
-        
-         answerButton.setAttribute("class", "choice");
-        
-         answerButton.setAttribute("value", answer);
 
-         answerButton.textContent = i + 1 + " - " + answer;
+        var answerButton = document.createElement("button");
 
-         answerButton.onClick = answerSelect();
+        answerButton.setAttribute("class", "choice");
 
-         choicesEl.appendChild(answerButton);
-     });
+        answerButton.setAttribute("value", answer);
+
+        answerButton.textContent = i + 1 + " - " + answer;
+
+        answerButton.onclick = answerSelect;
+
+        choicesEl.appendChild(answerButton);
+    });
 }
 
 //click on question answer
 //if wrong deduct time, display response and go to next question 
 function answerSelect() {
+    console.log("Hello");
     if (this.value !== questions[questionIndex].answer) {
-        
+
         time -= 15;
 
-    if (time < 0) {
-        time = 0;
-    }
+        if (time < 0) {
+            time = 0;
+        }
 
-    timeEl.textContext = time;
+        timeEl.textContext = time;
 
-    responseEl.textContent = "Last Question Incorrect";
+        responseEl.textContent = "Last Question Incorrect";
 
-    //If correct
+        //If correct
     } else {
 
-    responseEl.textContent = "Last Question Correct";    
+        responseEl.textContent = "Last Question Correct";
 
     }
 
     //display response for 3 seconds
     responseEl.setAttribute("class", "response show");
 
-    setTimeout(function() {
+    setTimeout(function () {
         responseEl.setAttribute("class", "response hide");
     }, 3000);
 
@@ -161,21 +162,23 @@ function finishQuiz() {
 }
 
 function saveScore() {
-    
+
     var initials = initialsEl.value.trim();
 
-    var highscores = JSON.parse(window.localStorage.getItem("highscores"));
-
+    var highscores = JSON.parse(window.localStorage.getItem("highscores")) || [];
+    
     var newScore = {
 
         score: time,
         initials: initials
-    
+
     };
 
     highscores.push(newScore);
 
     window.localStorage.setItem("highscores", JSON.stringify(highscores));
+
+    highScorePageEl.textContent = highscores;
 
     window.location.href = "highscores.html";
 }
